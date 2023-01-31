@@ -1,0 +1,30 @@
+<%= form_with model: @notification do |form| %>
+
+    <div>
+        <%= form.label :recipient %><br>
+        <%= form.number_field :recipient %>
+        <% @notification.errors.full_messages_for(:recipient).each do |message| %>
+        <div><%= message %></div>
+        <% end %>
+    </div>
+
+    <div>
+        <%= form.label :sender %><br>
+        <%= form.number_field :sender %>
+        <% @notification.errors.full_messages_for(:sender).each do |message| %>
+        <div><%= message %></div>
+        <% end %>
+    </div>
+
+    <div>
+        <%= form.label :task %><br>
+        <%= form.text_area :task %>
+        <% @notification.errors.full_messages_for(:task).each do |message| %>
+        <div><%= message %></div>
+        <% end %>
+    </div>
+
+    <div>
+        <%= form.submit %>
+    </div>
+<% end %>

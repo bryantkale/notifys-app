@@ -1,0 +1,17 @@
+<h1>
+    Recipient: <%= @notification.recipient.email %><br>
+    Sent From: <%= @notification.sender.email %>
+</h1>
+
+<p>
+    Tasks: <%= @notification.task %>
+</p>
+
+<ul>
+    <li>
+        <%= link_to "Destroy", notification_path(@notification), data: {
+            turbo_method: :delete,
+            turbo_confirm: "Are you sure?"
+        } %>
+    </li>
+</ul>

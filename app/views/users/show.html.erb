@@ -1,0 +1,18 @@
+<%= content_tag :h1, current_user.welcome%>
+<h2>Recieved Notifications</h2>
+<% current_user.recieved_notifications.each do |notification| %>
+    <ul>
+        <li>
+            <%= notification.task %>
+        </li>
+    </ul>
+<% end %>
+
+<h2>Sent Notifications</h2>
+<% current_user.sent_notifications.each do |notification| %>
+    <ul>
+        <li>
+            <%= notification.task %>
+        </li>
+    </ul>
+<% end %>

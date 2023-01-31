@@ -1,7 +1,16 @@
 Rails.application.routes.draw do
-  root 'homepage#index'
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  get '/app', to: 'homepage#index'
+  get '/app/*path', to: 'homepage#index'
+  resources :users, only: [:new, :create, :show, :index]
+  
+  resources :notifications
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  # get 'users/recieved_notifications', to: "users#recieved_notifications"
+  # get 'users/sent_notifications', to: "users#sent_notifications"
+
+  get '/session/login', to: "sessions#login"
+  post '/session/login', to: "sessions#create"
+  post '/session/logout', to: "sessions#destroy"
+  get '/session/logout', to: "sessions#destroy"
+
 end
