@@ -8,6 +8,7 @@ class UsersController < ApplicationController
 
     def show
         @user = User.find(params[:id])
+        puts @user.recipients
         render json: @user.to_json(:include => [:recipients, :senders])
     end
 

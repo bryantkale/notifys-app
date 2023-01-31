@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import Container from '@mui/material/Container';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 
 export default NewUser = () => {
     const [username, setUserName] = useState('');
@@ -27,20 +30,23 @@ export default NewUser = () => {
     }
 
     return (
-        <div>
-            <h1>New User Page</h1>
+        <Container sx={{ border: "5px dotted pink" }}>
+            <Button href={"/app"} variant="outlined">Back</Button>
+            <Typography variant="h3">New User Page</Typography>
             <form onSubmit={handleSubmit}>
                 <label>
-                    <p>Username</p>
+                    <Typography variant="subtitle">Username: </Typography>
                     <input onChange={e => setUserName(e.target.value)} type="text"></input>
                 </label>
+                <br />
+                <br />
                 <label>
-                    <p>Password</p>
+                    <Typography variant="subtitle">Password: </Typography>
                     <input onChange={e => setPassword(e.target.value)} type="password"></input>
                 </label>
-                <div>
-                    <button type="submit">Create Account</button>
-                </div>
+                <br />
+                <br />
+                <Button variant="outlined" type="submit">Create Account</Button>
             </form>
-        </div>)
+        </Container>)
 }

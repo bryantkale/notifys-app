@@ -1,20 +1,27 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "../components/Home";
 import Login from "../components/Login";
 import Dashboard from "../components/Dashboard";
 import NewUser from "../components/NewUser";
 import NewNotification from "../components/NewNotification";
-import { useToken } from "../hooks/useToken";
+import useToken from "../hooks/useToken";
 
-// const { token, setToken } = useToken();
+const RequireAuth = ({ children }) => {
+    const { token, setToken } = useToken();
 
-export default () => (
-    <Routes>
+    if (!token) {
+        return <Login setToken={setToken} />;
+    }
+    return children;
+};
+
+export default () => {
+    const { token } = useToken();
+    return (<Routes>
         <Route path="/app" exact element={<Home />} />
-        <Route path="/app/login" element={<Login />} />
-        <Route path="/app/users/:id" element={<Dashboard />} />
-        <Route path="/app/notifications" element={<NewNotification />} />
-        <Route path="/app/users" element={<NewUser />} />
-    </Routes>
-);
+        <Route path={`/app/users/${token}`} element={<RequireAuth><Dashboard /></RequireAuth>} />
+        <Route path="/app/notifications" element={<RequireAuth><NewNotification /></RequireAuth>} />
+        <Route path="/app/users" element={<RequireAuth><NewUser /></RequireAuth>} />
+    </Routes>)
+};

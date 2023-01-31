@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
-
+import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
 
 export default function Login({ setToken }) {
     const [username, setUserName] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
-    // console.log(setToken)
 
     async function loginUser(credentials) {
         const url = "http://localhost:3000/session/login";
@@ -26,19 +26,15 @@ export default function Login({ setToken }) {
             username,
             password
         });
-        console.log("----")
-        console.log(setToken)
-        console.log(token)
-        console.log("----")
-        // setToken(token);
-        navigate(`/app/users/${token.id}`)
+        setToken(token);
+        navigate(0)
     }
 
     return (
-        <div>
-            <Link to={"/app"}>Home</Link>
-            <h1>Carl's Notification Widget</h1>
-            <h2>Log In</h2>
+        <Container sx={{ border: "5px dotted turquoise" }}>
+            <Button href={"/app"}>Home</Button>
+            <Typography variant="h1">Carl's Notification Widget</Typography>
+            <Typography varaint="h2">Log In</Typography>
             <form onSubmit={handleSubmit}>
                 <label>
                     <p>Username</p>
@@ -48,12 +44,11 @@ export default function Login({ setToken }) {
                     <p>Password</p>
                     <input onChange={e => setPassword(e.target.value)} type="password"></input>
                 </label>
-                <div>
-                    <button type="submit">Submit</button>
-                </div>
+                <Container>
+                    <Button type="submit">Submit</Button>
+                </Container>
             </form>
-            {/* link to new user page */}
-            <Link to={"/app/users"}>New User?</Link>
-        </div>
+            <Button href={"/app/users"}>New User?</Button>
+        </Container>
     )
 }

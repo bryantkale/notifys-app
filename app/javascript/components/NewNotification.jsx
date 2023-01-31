@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useNavigate, useParams } from "react-router-dom";
-
+import useToken from "../hooks/useToken";
+import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
 
 export default NewNotification = () => {
     const [task, setTask] = useState('');
-    const [sender, setSender] = useState('');
     const [recipient, setRecipient] = useState('');
     const [users, setUsers] = useState();
+    const { token } = useToken();
 
+    console.log(token, 'token')
     useEffect(() => {
         const url = "http://localhost:3000/users";
         fetch(url).then(res => res.json())
@@ -28,39 +30,25 @@ export default NewNotification = () => {
 
     const handleSubmit = async e => {
         e.preventDefault();
-        const token = await sendNotification({
+        await sendNotification({
             task,
-            sender,
+            sender: token,
             recipient
         });
-        console.log(token);
-        // navigate(`/app/users/${token.id}`)
     }
 
     return (
-        <div>
-            <Link to={`/app`}>
-                <button>Back</button>
-            </Link>
-            <h1>Create A Notification</h1>
+        <Container sx={{ border: "5px dotted red" }}>
+            <Button variant="outlined" href={`/app/users/${token}`}>Back</Button>
+            <Typography variant="h4">Create A Notification</Typography><br />
             <form onSubmit={handleSubmit}>
                 <label>
-                    <p>Task</p>
+                    <Typography variant="subtitle">Task: </Typography>
                     <input onChange={e => setTask(e.target.value)} type="text" />
                 </label>
                 <br />
-                <label for="sender">Choose a user:</label>
-                <select onChange={e => setSender(e.target.value)} name="sender" id="sender">
-                    {users && users
-                        .filter(u => u.email !== null)
-                        .map((u, index) =>
-                            <option value={u.id} key={index}>
-                                {u.email}
-                            </option>
-                        )}
-                </select>
                 <br />
-                <label for="recipient">Choose a Recipient:</label>
+                <label htmlFor="recipient">Choose a Recipient: </label>
                 <select onChange={e => setRecipient(e.target.value)} name="recipient" id="recipient">
                     {users && users
                         .filter(u => u.email !== null)
@@ -69,11 +57,11 @@ export default NewNotification = () => {
                                 {u.email}
                             </option>
                         )}
-                </select>
-                <div>
-                    <button type="submit">Send</button>
-                </div>
+                </select><br />
+                <br />
+
+                <Button variant="outlined" type="submit">Send</Button>
             </form >
-        </div >
+        </Container >
     );
 }
