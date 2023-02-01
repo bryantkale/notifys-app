@@ -31,20 +31,22 @@ export default NewUser = ({ setToken }) => {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <label>
-                <Typography variant="subtitle">Username: </Typography>
-                <input onChange={e => setEmail(e.target.value)} type="text"></input>
-            </label>
-            <br />
-            <br />
-            <label>
-                <Typography variant="subtitle">Password: </Typography>
-                <input onChange={e => setPassword(e.target.value)} type="password"></input>
-            </label>
-            <br />
-            <br />
-            <Button variant="outlined" type="submit">Create Account</Button>
-        </form>
+        <Container fixed={true} sx={{ border: "900px" }}>
+            <form onSubmit={handleSubmit}>
+                <label>
+                    <Typography variant="subtitle">Username: </Typography>
+                    <input onChange={e => setEmail(e.target.value)} type="text"></input>
+                </label>
+                <br />
+                <br />
+                <label>
+                    <Typography variant="subtitle">Password: </Typography>
+                    <input onChange={e => setPassword(e.target.value)} type="password"></input>
+                </label>
+                <br />
+                <br />
+                <Button variant="outlined" type="submit">Create Account</Button>
+            </form>
+        </Container>
     )
 }

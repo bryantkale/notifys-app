@@ -4,6 +4,7 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 
+// User Dashboard
 export default Dashboard = () => {
     const [user, setUser] = useState('');
     const { setToken, token } = useToken();
@@ -11,7 +12,7 @@ export default Dashboard = () => {
 
     const [sentNotes, setSentNotes] = useState();
     const [recievedNotes, setRecievedNotes] = useState();
-    const welcome = user ? `Welcome, ${user.email}` : `Welcome`;
+    const welcome = user ? `Welcome, ${user.email}!` : `Welcome`;
 
     const handleLogOut = () => {
         setToken(null);
@@ -49,7 +50,7 @@ export default Dashboard = () => {
     }
 
     return (
-        <Container sx={{ border: "5px dotted violet" }}>
+        <Container fixed={true} sx={{ height: "900px", border: "5px dotted violet" }}>
             <Container>
                 <Button variant="outlined" href="/app">Back</Button>
                 <Typography variant="h3" sx={{ textDecoration: "underline" }}>{welcome}</Typography>
@@ -57,7 +58,7 @@ export default Dashboard = () => {
                 {(recievedNotes && recievedNotes.length > 0) ? recievedNotes.map((notes, index) =>
                     <ul key={index}>
                         <li>
-                            {notes.task}
+                            <button onClick={(e) => handleDelete(e, notes.id)}>x</button> {notes.task}
                         </li>
                     </ul>
 

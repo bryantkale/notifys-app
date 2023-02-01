@@ -32,18 +32,20 @@ export default function Login({ setToken }) {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <label>
-                <p>Username</p>
-                <input onChange={e => setUserName(e.target.value)} type="text"></input>
-            </label>
-            <label>
-                <p>Password</p>
-                <input onChange={e => setPassword(e.target.value)} type="password"></input>
-            </label>
-            <Container>
-                <Button type="submit">Submit</Button>
-            </Container>
-        </form>
+        <Container fixed={true} sx={{ height: "900px" }}>
+            <form onSubmit={handleSubmit}>
+                <label>
+                    <p>Username</p>
+                    <input onChange={e => setUserName(e.target.value)} type="text"></input>
+                </label>
+                <label>
+                    <p>Password</p>
+                    <input onChange={e => setPassword(e.target.value)} type="password"></input>
+                </label>
+                <Container>
+                    <Button type="submit">Submit</Button>
+                </Container>
+            </form>
+        </Container>
     )
 }

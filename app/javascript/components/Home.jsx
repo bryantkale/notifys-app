@@ -13,6 +13,7 @@ export default Home = () => {
     const [signup, setSignUp] = useState(false);
     const navigate = useNavigate();
 
+    // decides what screen to show
     const screenShow = (t, showSignup) => {
         if (t) {
             return (
@@ -39,12 +40,11 @@ export default Home = () => {
 
 
     return (
-        <Container sx={{ border: "5px dotted blue" }}>
+        <Container fixed={true} sx={{ height: "900px", border: "5px dotted blue" }}>
             <Typography variant="h2">Notification App</Typography>
             <Typography variant="subtitle">
                 Here you will be able to view and send notifications.
             </Typography>
-
             <Divider />
             <Container>
                 {screenShow(token, signup)}

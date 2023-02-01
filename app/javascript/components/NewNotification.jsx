@@ -38,7 +38,7 @@ export default NewNotification = () => {
         setResponse(data);
     }
     return (
-        <Container sx={{ border: "5px dotted red" }}>
+        <Container fixed={true} sx={{ height: "900px", border: "5px dotted red" }}>
             <Button variant="outlined" href={`/app/home`}>Back</Button>
             <Typography variant="h4">Create A Notification</Typography><br />
             <form onSubmit={handleSubmit}>

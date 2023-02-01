@@ -1,24 +1,11 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a simple notification project.
 
-Things you may want to cover:
+* Backend -> Ruby
+* Frontend -> React integrated into Rails
 
-* Ruby version
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# To Run
+* Run rails server, or ./bin/dev to initialize the database
+* navigate to the homepage localhost:3000/app
