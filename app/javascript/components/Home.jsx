@@ -17,23 +17,23 @@ export default Home = () => {
     const screenShow = (t, showSignup) => {
         if (t) {
             return (
-                <div>
+                <Container>
                     <Button onClick={() => navigate(`/app/home`)}>Navigate home</Button>
-                </div>
+                </Container>
             )
         } else if (showSignup) {
             return (
-                <div>
+                <Container>
                     <NewUser setToken={setToken} />
                     <Button onClick={() => setSignUp(false)}>login</Button>
-                </div>
+                </Container>
             )
         } else {
             return (
-                <div>
+                <Container>
                     <Login setToken={setToken} />
                     <Button onClick={() => setSignUp(true)}>signup here</Button>
-                </div>
+                </Container>
             )
         }
     }
@@ -42,13 +42,11 @@ export default Home = () => {
     return (
         <Container fixed={true} sx={{ height: "900px", border: "5px dotted blue" }}>
             <Typography variant="h2">Notification App</Typography>
-            <Typography variant="subtitle">
+            <Typography sx={{ paddingTop: "1em" }} variant="subtitle">
                 Here you will be able to view and send notifications.
             </Typography>
             <Divider />
-            <Container>
-                {screenShow(token, signup)}
-            </Container>
+            {screenShow(token, signup)}
         </Container>
     )
 };

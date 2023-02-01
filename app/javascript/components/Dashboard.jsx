@@ -53,28 +53,28 @@ export default Dashboard = () => {
         <Container fixed={true} sx={{ height: "900px", border: "5px dotted violet" }}>
             <Container>
                 <Button variant="outlined" href="/app">Back</Button>
-                <Typography variant="h3" sx={{ textDecoration: "underline" }}>{welcome}</Typography>
-                <Typography variant="subtitle1" sx={{ textDecoration: "underline" }}>Recieved Notifications</Typography>
+                <Typography variant="h3" sx={{ paddingTop: '1em', paddingBottom: "1em", textDecoration: "underline" }}>{welcome}</Typography>
+                <Typography variant="subtitle1" sx={{ paddingBottom: "0.5em", textDecoration: "underline" }}>Recieved Notifications</Typography>
                 {(recievedNotes && recievedNotes.length > 0) ? recievedNotes.map((notes, index) =>
                     <ul key={index}>
                         <li>
-                            <button onClick={(e) => handleDelete(e, notes.id)}>x</button> {notes.task}
+                            <Button onClick={(e) => handleDelete(e, notes.id)}>x</Button> {notes.task}
                         </li>
                     </ul>
 
                 ) : <div>Nothing to show...</div>}
-                <Typography variant="subtitle1" sx={{ textDecoration: "underline" }}>Sent Notifications</Typography>
+                <Typography variant="subtitle1" sx={{ paddingBottom: "0.5em", textDecoration: "underline" }}>Sent Notifications</Typography>
                 {notifDeleted && <div style={{ color: 'green' }}>Notification Deleted!</div>}
                 {(sentNotes && sentNotes.length > 0) ? sentNotes.map((notes, index) =>
                     <ul key={index}>
                         <li>
-                            <button onClick={(e) => handleDelete(e, notes.id)}>x</button> {notes.task}
+                            <Button onClick={(e) => handleDelete(e, notes.id)}>x</Button> {notes.task}
                         </li>
                     </ul>
 
                 ) : <div>Nothing to show...</div>}
             </Container>
-            <Container>
+            <Container sx={{ paddingTop: "2em" }} >
                 <Button variant="outlined" href="/app/notifications">New Notification</Button>
             </Container>
             <br />
