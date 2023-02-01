@@ -14,7 +14,6 @@ class SessionsController < ApplicationController
         @user = User.find_by(email: params[:username])
         if !!@user
             session[:user_id] = @user.id
-            puts session
             render json: @user
         else
             redirect_to login_path

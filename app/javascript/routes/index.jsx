@@ -11,17 +11,17 @@ const RequireAuth = ({ children }) => {
     const { token, setToken } = useToken();
 
     if (!token) {
-        return <Login setToken={setToken} />;
+        return (<Navigate to="/app" replace={true} />);
     }
     return children;
 };
 
 export default () => {
     const { token } = useToken();
-    return (<Routes>
-        <Route path="/app" exact element={<Home />} />
-        <Route path={`/app/users/${token}`} element={<RequireAuth><Dashboard /></RequireAuth>} />
-        <Route path="/app/notifications" element={<RequireAuth><NewNotification /></RequireAuth>} />
-        <Route path="/app/users" element={<RequireAuth><NewUser /></RequireAuth>} />
-    </Routes>)
+    return (
+        <Routes>
+            <Route path="/app" exact element={<Home />} />
+            <Route path="/app/home" element={<RequireAuth><Dashboard /></RequireAuth>} />
+            <Route path="/app/notifications" element={<RequireAuth><NewNotification /></RequireAuth>} />
+        </Routes>)
 };

@@ -8,9 +8,9 @@ export default NewNotification = () => {
     const [task, setTask] = useState('');
     const [recipient, setRecipient] = useState('');
     const [users, setUsers] = useState();
+    const [response, setResponse] = useState();
     const { token } = useToken();
 
-    console.log(token, 'token')
     useEffect(() => {
         const url = "http://localhost:3000/users";
         fetch(url).then(res => res.json())
@@ -30,16 +30,16 @@ export default NewNotification = () => {
 
     const handleSubmit = async e => {
         e.preventDefault();
-        await sendNotification({
+        const data = await sendNotification({
             task,
             sender: token,
             recipient
         });
+        setResponse(data);
     }
-
     return (
         <Container sx={{ border: "5px dotted red" }}>
-            <Button variant="outlined" href={`/app/users/${token}`}>Back</Button>
+            <Button variant="outlined" href={`/app/home`}>Back</Button>
             <Typography variant="h4">Create A Notification</Typography><br />
             <form onSubmit={handleSubmit}>
                 <label>
@@ -52,15 +52,19 @@ export default NewNotification = () => {
                 <select onChange={e => setRecipient(e.target.value)} name="recipient" id="recipient">
                     {users && users
                         .filter(u => u.email !== null)
+                        .filter(u => u.id !== token)
                         .map((u, index) =>
                             <option value={u.id} key={index}>
                                 {u.email}
                             </option>
                         )}
-                </select><br />
+                </select>
+                <br />
                 <br />
 
                 <Button variant="outlined" type="submit">Send</Button>
+                {(response && response.created_at) && <div style={{ color: 'green' }}>Notification Sent!</div>}
+
             </form >
         </Container >
     );

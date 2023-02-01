@@ -4,6 +4,7 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 
+
 export default function Login({ setToken }) {
     const [username, setUserName] = useState("");
     const [password, setPassword] = useState("");
@@ -27,28 +28,22 @@ export default function Login({ setToken }) {
             password
         });
         setToken(token);
-        navigate(0)
+        navigate(`/app/home`)
     }
 
     return (
-        <Container sx={{ border: "5px dotted turquoise" }}>
-            <Button href={"/app"}>Home</Button>
-            <Typography variant="h1">Carl's Notification Widget</Typography>
-            <Typography varaint="h2">Log In</Typography>
-            <form onSubmit={handleSubmit}>
-                <label>
-                    <p>Username</p>
-                    <input onChange={e => setUserName(e.target.value)} type="text"></input>
-                </label>
-                <label>
-                    <p>Password</p>
-                    <input onChange={e => setPassword(e.target.value)} type="password"></input>
-                </label>
-                <Container>
-                    <Button type="submit">Submit</Button>
-                </Container>
-            </form>
-            <Button href={"/app/users"}>New User?</Button>
-        </Container>
+        <form onSubmit={handleSubmit}>
+            <label>
+                <p>Username</p>
+                <input onChange={e => setUserName(e.target.value)} type="text"></input>
+            </label>
+            <label>
+                <p>Password</p>
+                <input onChange={e => setPassword(e.target.value)} type="password"></input>
+            </label>
+            <Container>
+                <Button type="submit">Submit</Button>
+            </Container>
+        </form>
     )
 }
